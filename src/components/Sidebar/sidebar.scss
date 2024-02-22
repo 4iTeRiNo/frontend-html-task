@@ -1,0 +1,193 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 90dvh;
+  width: 80px;
+  border-radius: 10px;
+  background-color: #000;
+  padding-left: 10px;
+  padding-right: 10px;
+  animation: ease-in close 0.5s reverse;
+
+  .logoFlex {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 100px;
+    column-gap: 10px;
+    width: 100%;
+
+    span {
+      transition: display 1s ease-out;
+      display: none;
+    }
+
+    .btn {
+      position: absolute;
+      right: -50px;
+      border: none;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: #000;
+      transform: rotateZ(0);
+      transition: background-color 0.4s ease;
+
+      animation: ease-in rotateButtonRight 0.5s normal;
+    }
+  }
+
+  .mainLinks {
+    display: flex;
+    height: 70%;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 10px;
+  }
+
+  .link {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    border-radius: 10px;
+    padding: 10px;
+    column-gap: 10px;
+
+    span {
+      display: none;
+    }
+  }
+
+  .userPop {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    width: 100%;
+    border-top: 1px solid #f0f2ff;
+
+    .userFlex {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      flex-direction: row;
+
+      .userInfoBlock {
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+        span {
+          display: none;
+        }
+      }
+
+      .userDetails {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+
+  .buttonShowPopup {
+    display: none;
+    border: none;
+    flex: 0 0 auto;
+    padding: 10px;
+    background: transparent;
+    cursor: pointer;
+    border-radius: 10px;
+  }
+}
+
+.opened {
+  width: 230px;
+  animation: ease-out open 0.7s normal;
+
+  .logoFlex {
+    justify-content: start;
+
+    span {
+      transition: display 1s ease-out;
+      display: block;
+    }
+    .btn {
+      right: -30px;
+      background-color: #1e293b;
+      transform: rotateZ(0);
+      transition: background-color 0.4s ease;
+      animation: ease-out rotateButtonLeft 0.5s reverse;
+    }
+  }
+  .userPop {
+    .userFlex {
+      .userInfoBlock {
+        span {
+          display: block;
+        }
+      }
+    }
+  }
+
+  .link {
+    width: 150px;
+    span {
+      display: block;
+    }
+  }
+
+  .buttonShowPopup {
+    display: block;
+  }
+}
+
+@media (hover: hover) {
+  .link:hover {
+    cursor: pointer;
+    background-color: #75767c;
+  }
+
+  .buttonShowPopup:hover {
+    background-color: #75767c;
+  }
+}
+
+@keyframes open {
+  0% {
+    width: 80px;
+  }
+  100% {
+    width: 230px;
+  }
+}
+
+@keyframes close {
+  0% {
+    width: 80px;
+  }
+  100% {
+    width: 230px;
+  }
+}
+
+@keyframes rotateButtonLeft {
+  0% {
+    transform: rotateZ(0);
+  }
+  100% {
+    transform: rotateZ(180deg);
+  }
+}
+
+@keyframes rotateButtonRight {
+  0% {
+    transform: rotateZ(180deg);
+  }
+  100% {
+    transform: rotateZ(0);
+  }
+}
