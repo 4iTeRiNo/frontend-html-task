@@ -14,3 +14,10 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+#root {
+  display: flex;
+  flex-direction: row;
+  column-gap: 20px;
+  align-items: end;
+}

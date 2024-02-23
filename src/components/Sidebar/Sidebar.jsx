@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import logo from '../../assets/logo.png';
 import avatar from '../../assets/avatar.png';
+import Popup from '../Popup';
 
 const routes = [
   { title: 'Home', icon: 'fas-solid fa-house', path: '/' },
@@ -20,7 +21,7 @@ const user = [
     avatar: avatar,
     email: 'Ablent1990@teleworm.us',
     name: 'John',
-    sername: 'Wick',
+    surname: 'Wick',
   },
 ];
 
@@ -35,13 +36,17 @@ export default class Sidebar extends React.Component {
 
     this.state = {
       isOpened: true,
-      isActive: false,
+      isShowPopup: false,
       title: null,
     };
   }
 
   toggleSidebar = () => {
     this.setState((state) => ({ isOpened: !state.isOpened }));
+  };
+
+  togglePopup = () => {
+    this.setState((state) => ({ isShowPopup: !state.isShowPopup }));
   };
 
   activeLink = (title) => {
@@ -53,81 +58,89 @@ export default class Sidebar extends React.Component {
   };
 
   render() {
-    const { isOpened, title } = this.state;
+    const { isOpened, title, isShowPopup } = this.state;
     const width = 32;
 
     const containerClassnames = classnames('sidebar', { opened: isOpened });
     const logoFlex = 'logoFlex';
     const flexLinks = classnames('flexLinks');
-    console.log(title);
+    console.log(isShowPopup);
 
     return (
-      <div className={containerClassnames}>
-        <div className={logoFlex}>
-          <img width={`${width}px`} src={logo} alt="TensorFlow logo" />
-          <span>TensorFlow</span>
-          <button className="btn" onClick={this.toggleSidebar}>
-            <FontAwesomeIcon icon={isOpened ? 'angle-left' : 'angle-right'} />
-          </button>
-        </div>
+      <>
+        <div className={containerClassnames}>
+          <div className={logoFlex}>
+            <img width={`${width}px`} src={logo} alt="TensorFlow logo" />
+            <span>TensorFlow</span>
+            <button className="btn" onClick={this.toggleSidebar}>
+              <FontAwesomeIcon icon={isOpened ? 'angle-left' : 'angle-right'} />
+            </button>
+          </div>
 
-        <div className={classnames('mainLinks', { flexLinks })}>
-          {routes.map((route) => (
-            <div
-              className={classnames('link', {
-                ['active']: title === route.title,
-              })}
-              key={route.title}
-              onClick={(e) => {
-                e.preventDefault();
-                this.activeLink(route.title);
-                this.goToRoute(route.path);
-              }}
-            >
-              <FontAwesomeIcon icon={route.icon} />
-              <span>{route.title}</span>
-            </div>
-          ))}
-        </div>
-
-        <div className={classnames('bottomLinks', { flexLinks })}>
-          {bottomRoutes.map((route) => (
-            <div
-              key={route.title}
-              className={classnames('link', {
-                ['active']: title === route.title,
-              })}
-              onClick={(e) => {
-                e.preventDefault();
-                this.activeLink(route.title);
-                this.goToRoute(route.path);
-              }}
-            >
-              <FontAwesomeIcon icon={route.icon} />
-              <span>{route.title}</span>
-            </div>
-          ))}
-        </div>
-
-        <div className="userPop">
-          {user.map((user) => (
-            <div className="userFlex" key={user.id}>
-              <div className="userInfoBlock">
-                <img width="60px" height="60px" src={user.avatar} />
-                <div className="userDetails">
-                  <span>User Account</span>
-                  <span>
-                    {user.name} {user.sername}
-                  </span>
-                </div>
+          <div className={classnames('mainLinks', { flexLinks })}>
+            {routes.map((route) => (
+              <div
+                className={classnames('link', {
+                  ['active']: title === route.title,
+                })}
+                key={route.title}
+                onClick={(e) => {
+                  e.preventDefault();
+                  this.activeLink(route.title);
+                  this.goToRoute(route.path);
+                }}
+              >
+                <FontAwesomeIcon icon={route.icon} />
+                <span>{route.title}</span>
               </div>
-              <button className="buttonShowPopup">
-                <FontAwesomeIcon icon={'fa-sliders'} />
-              </button>
-            </div>
-          ))}
+            ))}
+          </div>
+
+          <div className={classnames('bottomLinks', { flexLinks })}>
+            {bottomRoutes.map((route) => (
+              <div
+                key={route.title}
+                className={classnames('link', {
+                  ['active']: title === route.title,
+                })}
+                onClick={(e) => {
+                  e.preventDefault();
+                  this.activeLink(route.title);
+                  this.goToRoute(route.path);
+                }}
+              >
+                <FontAwesomeIcon icon={route.icon} />
+                <span>{route.title}</span>
+              </div>
+            ))}
+          </div>
+
+          <div className="userPop">
+            {user.map((user) => (
+              <div className="userFlex" key={user.id}>
+                <div className="userInfoBlock">
+                  <button className="useBtn" onClick={() => this.togglePopup()}>
+                    <img width="50px" height="50px" src={user.avatar} />
+                  </button>
+                  <div className="userDetails">
+                    <span>User Account</span>
+                    <span>
+                      {user.name} {user.surname}
+                    </span>
+                  </div>
+                </div>
+                <button
+                  onClick={() => this.togglePopup()}
+                  className="buttonShowPopup"
+                >
+                  <FontAwesomeIcon icon={'fa-sliders'} />
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+        {isShowPopup ? <Popup /> : null}
+      </>
     );
   }
 }

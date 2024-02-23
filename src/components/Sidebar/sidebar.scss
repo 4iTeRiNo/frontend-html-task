@@ -83,6 +83,14 @@ $animationOpacity: ease-in-out opacity 0.7s normal;
     margin-top: 20px;
     margin-right: 20px;
 
+    .useBtn {
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      width: 55px;
+      height: 55px;
+    }
+
     .userFlex {
       display: flex;
       justify-content: start;
