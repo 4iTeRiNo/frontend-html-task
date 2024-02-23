@@ -35,6 +35,8 @@ export default class Sidebar extends React.Component {
 
     this.state = {
       isOpened: true,
+      isActive: false,
+      title: null,
     };
   }
 
@@ -42,17 +44,22 @@ export default class Sidebar extends React.Component {
     this.setState((state) => ({ isOpened: !state.isOpened }));
   };
 
+  activeLink = (title) => {
+    this.setState({ title: title });
+  };
+
   goToRoute = (path) => {
     console.log(`going to "${path}"`);
   };
 
   render() {
-    const { isOpened } = this.state;
+    const { isOpened, title } = this.state;
     const width = 32;
+
     const containerClassnames = classnames('sidebar', { opened: isOpened });
-    const logoFlex = classnames('logoFlex');
-    const mainLinks = classnames('mainLinks');
-    const bottomLinks = classnames('bottomLinks');
+    const logoFlex = 'logoFlex';
+    const flexLinks = classnames('flexLinks');
+    console.log(title);
 
     return (
       <div className={containerClassnames}>
@@ -64,12 +71,18 @@ export default class Sidebar extends React.Component {
           </button>
         </div>
 
-        <div className={mainLinks}>
+        <div className={classnames('mainLinks', { flexLinks })}>
           {routes.map((route) => (
             <div
-              className="link"
+              className={classnames('link', {
+                ['active']: title === route.title,
+              })}
               key={route.title}
-              onClick={() => this.goToRoute(route.path)}
+              onClick={(e) => {
+                e.preventDefault();
+                this.activeLink(route.title);
+                this.goToRoute(route.path);
+              }}
             >
               <FontAwesomeIcon icon={route.icon} />
               <span>{route.title}</span>
@@ -77,23 +90,30 @@ export default class Sidebar extends React.Component {
           ))}
         </div>
 
-        <div className={bottomLinks}>
+        <div className={classnames('bottomLinks', { flexLinks })}>
           {bottomRoutes.map((route) => (
             <div
-              className="link"
               key={route.title}
-              onClick={() => this.goToRoute(route.path)}
+              className={classnames('link', {
+                ['active']: title === route.title,
+              })}
+              onClick={(e) => {
+                e.preventDefault();
+                this.activeLink(route.title);
+                this.goToRoute(route.path);
+              }}
             >
               <FontAwesomeIcon icon={route.icon} />
               <span>{route.title}</span>
             </div>
           ))}
         </div>
+
         <div className="userPop">
           {user.map((user) => (
             <div className="userFlex" key={user.id}>
               <div className="userInfoBlock">
-                <img width="60px" src={user.avatar} />
+                <img width="60px" height="60px" src={user.avatar} />
                 <div className="userDetails">
                   <span>User Account</span>
                   <span>

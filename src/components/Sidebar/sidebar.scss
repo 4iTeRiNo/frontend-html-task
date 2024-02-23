@@ -1,9 +1,11 @@
+$animationOpacity: ease-in-out opacity 0.7s normal;
+
 .sidebar {
   display: flex;
   flex-direction: column;
   align-items: center;
   height: 90dvh;
-  width: 80px;
+  width: 50px;
   border-radius: 10px;
   background-color: #000;
   padding-left: 10px;
@@ -21,7 +23,7 @@
     width: 100%;
 
     span {
-      transition: display 1s ease-out;
+      animation: $animationOpacity;
       display: none;
     }
 
@@ -40,24 +42,30 @@
     }
   }
 
-  .mainLinks {
+  .flexLinks {
     display: flex;
-    height: 70%;
+    width: 100%;
     flex-direction: column;
     align-items: center;
     row-gap: 10px;
   }
 
+  .mainLinks {
+    height: 70%;
+  }
+
   .link {
     display: flex;
-    justify-content: start;
-    align-items: center;
     border-radius: 10px;
     padding: 10px;
     column-gap: 10px;
+    transition: background-color 0.4s ease;
 
     span {
       display: none;
+      height: 24px;
+      animation: $animationOpacity;
+      opacity: 0;
     }
   }
 
@@ -69,6 +77,7 @@
     height: 100px;
     width: 100%;
     border-top: 1px solid #f0f2ff;
+    margin-top: 20px;
 
     .userFlex {
       display: flex;
@@ -81,14 +90,15 @@
         display: flex;
         width: 100%;
         flex-direction: row;
-        span {
-          display: none;
-        }
+        justify-content: center;
       }
 
       .userDetails {
         display: flex;
         flex-direction: column;
+        span {
+          display: none;
+        }
       }
     }
   }
@@ -105,37 +115,50 @@
 }
 
 .opened {
-  width: 230px;
-  animation: ease-out open 0.7s normal;
+  width: 190px;
+  animation: ease-out open 0.6s normal;
 
   .logoFlex {
     justify-content: start;
 
     span {
-      transition: display 1s ease-out;
+      opacity: 1;
       display: block;
     }
+
     .btn {
       right: -30px;
       background-color: #1e293b;
       transform: rotateZ(0);
-      transition: background-color 0.4s ease;
       animation: ease-out rotateButtonLeft 0.5s reverse;
     }
   }
+
   .userPop {
     .userFlex {
       .userInfoBlock {
-        span {
-          display: block;
+        justify-content: flex-start;
+
+        .userDetails {
+          display: flex;
+          flex-direction: column;
+          span {
+            display: ruby;
+            animation: $animationOpacity;
+          }
         }
       }
     }
   }
 
+  .flexLinks {
+    align-items: flex-start;
+  }
   .link {
     width: 150px;
     span {
+      animation: $animationOpacity;
+      opacity: 1;
       display: block;
     }
   }
@@ -145,10 +168,16 @@
   }
 }
 
+.active {
+  background-color: #75767c;
+  transition: background-color 0.4s ease;
+}
+
 @media (hover: hover) {
   .link:hover {
     cursor: pointer;
     background-color: #75767c;
+    transition: background-color 0.6s ease;
   }
 
   .buttonShowPopup:hover {
@@ -158,19 +187,19 @@
 
 @keyframes open {
   0% {
-    width: 80px;
+    width: 50px;
   }
   100% {
-    width: 230px;
+    width: 190px;
   }
 }
 
 @keyframes close {
   0% {
-    width: 80px;
+    width: 50px;
   }
   100% {
-    width: 230px;
+    width: 190px;
   }
 }
 
@@ -189,5 +218,29 @@
   }
   100% {
     transform: rotateZ(0);
+  }
+}
+
+@keyframes opacity {
+  0% {
+    display: none;
+    opacity: 0;
+  }
+  20% {
+    display: none;
+    font-size: 0px;
+    opacity: 0;
+  }
+
+  80% {
+    opacity: 0.5;
+  }
+
+  80% {
+    opacity: 0.75;
+  }
+
+  100% {
+    opacity: 1;
   }
 }
