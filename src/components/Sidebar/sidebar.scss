@@ -8,14 +8,14 @@ $animationOpacity: ease-in-out opacity 0.7s normal;
   width: 50px;
   border-radius: 10px;
   background-color: #000;
-  padding-left: 10px;
+  padding-left: 20px;
   padding-right: 10px;
   animation: ease-in close 0.5s reverse;
 
   .logoFlex {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     position: relative;
     height: 100px;
@@ -46,7 +46,7 @@ $animationOpacity: ease-in-out opacity 0.7s normal;
     display: flex;
     width: 100%;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     row-gap: 10px;
   }
 
@@ -57,7 +57,10 @@ $animationOpacity: ease-in-out opacity 0.7s normal;
   .link {
     display: flex;
     border-radius: 10px;
-    padding: 10px;
+    padding: 5px;
+    height: 30px;
+    justify-content: start;
+    align-items: center;
     column-gap: 10px;
     transition: background-color 0.4s ease;
 
@@ -72,16 +75,17 @@ $animationOpacity: ease-in-out opacity 0.7s normal;
   .userPop {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     height: 100px;
     width: 100%;
     border-top: 1px solid #f0f2ff;
     margin-top: 20px;
+    margin-right: 20px;
 
     .userFlex {
       display: flex;
-      justify-content: center;
+      justify-content: start;
       align-items: center;
       width: 100%;
       flex-direction: row;
@@ -90,7 +94,7 @@ $animationOpacity: ease-in-out opacity 0.7s normal;
         display: flex;
         width: 100%;
         flex-direction: row;
-        justify-content: center;
+        justify-content: start;
       }
 
       .userDetails {
